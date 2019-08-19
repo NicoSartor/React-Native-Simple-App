@@ -1,23 +1,52 @@
 import React from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import {
+	StyleSheet,
+	KeyboardAvoidingView,
+	TextInput,
+	Button,
+	Text,
+	View,
+	TouchableOpacity,
+} from "react-native";
+import { Icon } from "react-native-elements";
 
 export default function GoalInput(props) {
 	return (
-		<View style={styles.TextAreaWrapper}>
-			<TextInput
-				style={styles.TextInput}
-				placeholder='Goal'
-				onChangeText={props.setTextAreaValue}
-				value={props.textAreaValue}
-			/>
-			<Button
-				style={styles.Button}
-				onPress={() => {
-					props.handleValueSubmission(props.textAreaValue);
-				}}
-				title='Add Goal'
-			/>
-		</View>
+		<KeyboardAvoidingView behavior='position'>
+			<View style={styles.TextAreaWrapper}>
+				<TextInput
+					style={styles.TextInput}
+					placeholder='Enter List Item'
+					onChangeText={props.setTextAreaValue}
+					value={props.textAreaValue}
+					onSubmitEditing={() => {
+						props.handleValueSubmission(props.textAreaValue);
+					}}
+				/>
+				{/* <Button
+					style={styles.Button}
+					onPress={() => {
+						props.handleValueSubmission(props.textAreaValue);
+					}}
+					title='Add Item'
+				/> */}
+				<TouchableOpacity
+					style={styles.AddBtnWrapper}
+					onPress={() => {
+						props.handleValueSubmission(props.textAreaValue);
+					}}
+				>
+					<View style={styles.AddBtn}>
+						<Icon
+							size={45}
+							name='add-box'
+							type='material'
+							color='#1952cf'
+						/>
+					</View>
+				</TouchableOpacity>
+			</View>
+		</KeyboardAvoidingView>
 	);
 }
 
@@ -25,13 +54,26 @@ const styles = StyleSheet.create({
 	TextAreaWrapper: {
 		flexDirection: "row",
 		justifyContent: "space-around",
-		// paddingBottom: 5,
-		height: 40,
+		paddingBottom: 20,
+		paddingTop: 60,
+		borderBottomColor: "#d4d4d4",
+		borderBottomWidth: 4,
 	},
 	TextInput: {
-		borderBottomColor: "black",
+		borderBottomColor: "#949494",
 		borderBottomWidth: 1,
 		width: "70%",
 	},
-	Button: {},
+	AddBtnWrapper: {
+		width: "20%",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	AddBtn: {
+		width: "100%",
+		flexDirection: "row",
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 });

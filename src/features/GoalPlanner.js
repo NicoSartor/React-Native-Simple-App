@@ -108,22 +108,35 @@ export const GoalPlanner = props => {
 
 	return (
 		<View style={styles.Container}>
-			<GoalInput
-				setTextAreaValue={setTextAreaValue}
-				textAreaValue={textAreaValue}
-				handleValueSubmission={handleValueSubmission}
-			/>
-			<GoalList goals={goals} handleValueDeletion={handleValueDeletion} />
+			<View style={styles.InputWrapper}>
+				<GoalInput
+					setTextAreaValue={setTextAreaValue}
+					textAreaValue={textAreaValue}
+					handleValueSubmission={handleValueSubmission}
+				/>
+			</View>
+
+			<View style={styles.ListWrapper}>
+				<GoalList
+					goals={goals}
+					handleValueDeletion={handleValueDeletion}
+				/>
+			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	Container: {
-		paddingTop: 50,
-		paddingLeft: 10,
-		paddingRight: 10,
 		flexDirection: "column",
 		height: "100%",
 	},
+	ListWrapper: {
+		padding: 10,
+		flex: 1,
+		paddingLeft: 10,
+		paddingRight: 10,
+		backgroundColor: "#fafafa",
+	},
+	InputWrapper: { width: "100%" },
 });
